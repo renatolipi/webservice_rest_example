@@ -133,3 +133,10 @@ Or you can limit your search using query string, such as below:
 
 *Don't forget the trailing slash ("/")*
 
+
+---
+
+**Checking tests coverage:**
+
+    python desafio/manage.py test desafio/zipservice
+

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'zipservice',
     'rest_framework',
+    'django_nose',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -123,6 +124,15 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+
+# TESTING
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
+NOSE_ARGS = ['--with-coverage',
+             '--cover-package=zipservice',
+             ]
+
+# LOGGING
 
 LOGGING = {
     'version': 1,
