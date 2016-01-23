@@ -69,7 +69,7 @@ The database used was sqlite3. No extra packages were necessary on Ubuntu 12_10.
     (VENV)/path/to/my_project/webservice_rest_example$  pip install -r requirements.txt
 
 
-- **If you had any trouble here, try to update your pip** `pip install -U pip`.
+- **If you had ANY trouble here, try to update your pip** `pip install -U pip`. Then install requirements.txt again.
 
 ---
 
@@ -82,6 +82,20 @@ The database used was sqlite3. No extra packages were necessary on Ubuntu 12_10.
     python desafio/manage.py migrate
 
 A lot of "Applying..." lines will come. If they're all OK, then you're DONE.
+
+
+---
+
+** Automated tests:**
+
+Run the automated tests to check if everything is working:
+
+    pip install -r test_requirements.txt
+
+
+then:
+
+    python desafio/manage.py test zipservice
 
 
 ---
@@ -118,18 +132,4 @@ Or you can limit your search using query string, such as below:
 
 
 *Don't forget the trailing slash ("/")*
-
-
----
-
-**testing:**
-
-instale as dependências de teste:
-
-    pip install -r test_requirements.txt
-
-
-depois:
-
-    python desafio/manage.py test zipservice
 
