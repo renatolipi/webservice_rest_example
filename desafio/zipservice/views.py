@@ -1,6 +1,5 @@
 from __future__ import unicode_literals
 
-from django.http import HttpResponse
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -67,11 +66,16 @@ def handle_zipcode(request, zip_code=None):
 
 
 @api_view(['DELETE'])
-def delete_zipcode(request, zip_code=None):
+def delete_zipcode(request, zip_code):
     """
     success return: 204
-    error return:
     """
+    try:
+        address = Address.objects.get(zip_code=zip_code)
+    except Address.DoesNotExist:
+        return Response("Zip code not found",
+                        status=status.HTTP_404_NOT_FOUND)
 
-    return Response("OK - DELETE - zip: %s" % zip_code,
-                    status=204)
+    address.delete()
+    return Response("Zip code deleted from database",
+                    status=status.HTTP_204_NO_CONTENT)
