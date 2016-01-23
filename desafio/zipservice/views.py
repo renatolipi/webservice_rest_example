@@ -33,6 +33,9 @@ def handle_zipcode(request, zip_code=None):
                 return Response("Invalid query filter value",
                                 status=status.HTTP_400_BAD_REQUEST)
 
+        elif len(request.query_params) == 0:
+            limit = 0
+
         else:
             return Response("Invalid query filter",
                             status=status.HTTP_400_BAD_REQUEST)
