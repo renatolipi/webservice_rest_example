@@ -2,12 +2,22 @@
 
 
 #### INDEX:
+
  - ##### INSTALL:
-     ###### Create your virtualenv
-     ###### Clone this repo
-     ###### Setup your database
+
+     - ###### Create your virtualenv
+
+     - ###### Clone this repo
+
+     - ###### Setup your database
 
  - ##### HOW TO USE
+
+     - ###### Listing addresses
+
+     - ###### Including an address
+
+     - ###### Removing an address
 
 
 ---
