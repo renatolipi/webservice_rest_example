@@ -1,7 +1,9 @@
 from __future__ import unicode_literals
 
+import logging
 import requests
 
+logger = logging.getLogger(__name__)
 
 POSTMON_ZIPCODE_URL = 'http://api.postmon.com.br/v1/cep/'
 
@@ -17,6 +19,7 @@ def get_address_from_zipcode(zipcode):
     response = requests.get('%s%s' % (POSTMON_ZIPCODE_URL, zipcode))
 
     if response.status_code == 404:
+        logger.debug("Zipcode not found on Postmon")
         return None
 
     # TODO: improve error handling
@@ -26,10 +29,12 @@ def get_address_from_zipcode(zipcode):
                   'city': response.json()['cidade'],
                   'state': response.json()['estado'],
                   'zip_code': response.json()['cep']}
-    except ValueError:
+    except ValueError as error:
+        logger.error("ValueError: %s" % error.message)
         return None
 
-    except Exception:
+    except Exception as error:
+        logger.error("General Exception: %s" % error.message)
         return None
 
     return result

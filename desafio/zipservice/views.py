@@ -1,5 +1,7 @@
 from __future__ import unicode_literals
 
+import logging
+
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -7,6 +9,8 @@ from rest_framework.response import Response
 from zipservice import postmon_tool as pt
 from zipservice.models import Address
 from zipservice.serializers import AddressSerializer
+
+logger = logging.getLogger(__name__)
 
 
 @api_view(['GET'])
@@ -30,6 +34,7 @@ def handle_zipcode(request, zip_code=None):
             try:
                 limit = int(request.query_params.get('limit'))
             except Exception:
+                logger.debug("Invalid query filter value: %s" % request.query_params)
                 return Response("Invalid query filter value",
                                 status=status.HTTP_400_BAD_REQUEST)
 
@@ -37,6 +42,7 @@ def handle_zipcode(request, zip_code=None):
             limit = 0
 
         else:
+            logger.debug("Invalid query filter: %s" % request.query_params)
             return Response("Invalid query filter",
                             status=status.HTTP_400_BAD_REQUEST)
 
@@ -46,6 +52,7 @@ def handle_zipcode(request, zip_code=None):
             addresses = Address.objects.all()
 
         serializer = AddressSerializer(addresses, many=True)
+        logger.debug("GET Address - OK (200)")
         return Response(serializer.data,
                         status=status.HTTP_200_OK)
 
@@ -53,6 +60,7 @@ def handle_zipcode(request, zip_code=None):
 
         zip_code = request.data.get('zip_code')
         if not zip_code:
+            logger.debug("Zip code missing (post parameter)")
             return Response("Zip code missing",
                             status=status.HTTP_400_BAD_REQUEST)
 
@@ -63,6 +71,7 @@ def handle_zipcode(request, zip_code=None):
             if serializer.is_valid():
                 serializer.save()
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
+            logger.warning("Error while saving: %s" % serializer.errors)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
         return Response("Zip code not found", status=status.HTTP_404_NOT_FOUND)
@@ -76,6 +85,7 @@ def delete_zipcode(request, zip_code):
     try:
         address = Address.objects.get(zip_code=zip_code)
     except Address.DoesNotExist:
+        logger.debug("zip code not found: %s" % zip_code)
         return Response("Zip code not found",
                         status=status.HTTP_404_NOT_FOUND)
 
