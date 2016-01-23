@@ -64,12 +64,15 @@ The database used was sqlite3. No extra packages were necessary on Ubuntu 12_10.
     (VENV)/path/to/my_projects$  cd webservice_rest_example
 
 
-**You'll need to install its requirements:**
+**update your pip:**
+
+    (VENV)/path/to/my_project/webservice_rest_example$  pip install -U pip
+
+
+**Now, you'll need to install its requirements:**
 
     (VENV)/path/to/my_project/webservice_rest_example$  pip install -r requirements.txt
 
-
-- **If you had ANY trouble here, try to update your pip** `pip install -U pip`. Then install requirements.txt again.
 
 ---
 
@@ -132,11 +135,3 @@ Or you can limit your search using query string, such as below:
 
 
 *Don't forget the trailing slash ("/")*
-
-
----
-
-**Checking tests coverage:**
-
-    python desafio/manage.py test desafio/zipservice
-
