@@ -19,4 +19,17 @@ def get_address_from_zipcode(zipcode):
     if response.status_code == 404:
         return None
 
-    return response.json()
+    # TODO: improve error handling
+    try:
+        result = {'street': response.json()['logradouro'],
+                  'district': response.json()['bairro'],
+                  'city': response.json()['cidade'],
+                  'state': response.json()['estado'],
+                  'zip_code': response.json()['cep']}
+    except ValueError:
+        return None
+
+    except Exception:
+        return None
+
+    return result
