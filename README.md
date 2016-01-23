@@ -118,3 +118,18 @@ Or you can limit your search using query string, such as below:
 
 
 *Don't forget the trailing slash ("/")*
+
+
+---
+
+**testing:**
+
+instale as dependências de teste:
+
+    pip install -r test_requirements.txt
+
+
+depois:
+
+    python desafio/manage.py test zipservice
+

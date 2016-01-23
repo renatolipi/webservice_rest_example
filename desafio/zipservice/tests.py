@@ -1,9 +1,23 @@
 from __future__ import unicode_literals
 
+import mock
+
 from django.test import TestCase
 from django.test import Client
 
 from zipservice.models import Address
+
+
+def _postmon_tools_mocked_return_none(zip_code):
+    return None
+
+
+def _postmon_tools_mocked_return_values(zip_code):
+    return {'address': 'test street',
+            'neighborhood': 'test neighborhood',
+            'city': 'test city',
+            'state': 'test state',
+            'zip_code': '12345678'}
 
 
 class ZipserviceGetTests(TestCase):
@@ -88,8 +102,8 @@ class ZipservicePostTests(TestCase):
 
     # SUCCESS scenarios
 
+    @mock.patch("zipservice.postmon_tool.get_address_from_zipcode", _postmon_tools_mocked_return_values)
     def test_input_address_given_a_correct_zipcode(self):
-        # TODO: mock postmon_tool call
         client = Client()
 
         response = client.get('/zipcode/')
@@ -108,8 +122,8 @@ class ZipservicePostTests(TestCase):
 
     # ERROR scenarios
 
+    @mock.patch("zipservice.postmon_tool.get_address_from_zipcode", _postmon_tools_mocked_return_values)
     def test_input_address_given_a_valid_zipcode_twice(self):
-        # TODO: mock postmon_tool call
         client = Client()
 
         response = client.get('/zipcode/')
@@ -133,8 +147,8 @@ class ZipservicePostTests(TestCase):
         self.assertEqual(len(response4.data), 1)
 
 
+    @mock.patch("zipservice.postmon_tool.get_address_from_zipcode", _postmon_tools_mocked_return_none)
     def test_input_address_given_an_invalid_zipcode(self):
-        # TODO: mock postmon_tool call
         client = Client()
 
         response = client.get('/zipcode/')
@@ -169,8 +183,8 @@ class ZipservicePostTests(TestCase):
     # def test_input_address_error_while_saving(self):
     #     pass
 
+    @mock.patch("zipservice.postmon_tool.get_address_from_zipcode", _postmon_tools_mocked_return_none)
     def test_input_address_when_zipcode_not_found(self):
-        # TODO: mock postmon_tool call
         client = Client()
 
         response = client.get('/zipcode/')
