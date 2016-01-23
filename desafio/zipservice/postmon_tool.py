@@ -21,8 +21,8 @@ def get_address_from_zipcode(zipcode):
 
     # TODO: improve error handling
     try:
-        result = {'street': response.json()['logradouro'],
-                  'district': response.json()['bairro'],
+        result = {'address': response.json()['logradouro'],
+                  'neighborhood': response.json()['bairro'],
                   'city': response.json()['cidade'],
                   'state': response.json()['estado'],
                   'zip_code': response.json()['cep']}

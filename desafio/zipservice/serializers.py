@@ -8,4 +8,4 @@ class AddressSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Address
-        fields = ('id', 'street', 'district', 'city', 'state', 'zip_code')
+        fields = ('address', 'neighborhood', 'city', 'state', 'zip_code')
