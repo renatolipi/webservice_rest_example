@@ -27,7 +27,7 @@
 
 ##### Warning:
 
-This project was created and tested on Ubuntu 12.10. 
+This project was created and tested on Ubuntu 12.10, with Python 2.7.3. 
 The database used was sqlite3. No extra packages were necessary on Ubuntu 12_10.
 *If you had any problem while installing this project, please contact me.*
 
@@ -59,7 +59,7 @@ The database used was sqlite3. No extra packages were necessary on Ubuntu 12_10.
     (VENV)/path/to/my_project$ git clone git@github.com:renatolipi/webservice_rest_example.git
 
 
-**When ready, go to the project's folder:
+**When ready, go to the project's folder:**
 
     (VENV)/path/to/my_projects$  cd webservice_rest_example
 
